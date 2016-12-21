@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yhd.test</groupId>
+    <artifactId>hbase-prefixtree-scan</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hadoop.version>2.6.0-cdh5.4.3</hadoop.version>
+        <hbase.version>1.0.0-cdh5.4.3</hbase.version>
+        <!--hbase.version>1.2.4</hbase.version-->
+
+        <maven.min.version>3.0.3</maven.min.version>
+        <javaVersion>1.8</javaVersion>
+        <targetJavaVersion>1.7</targetJavaVersion>
+        <sourceJavaVersion>${targetJavaVersion}</sourceJavaVersion>
+        <java.min.version>${javaVersion}</java.min.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-prefix-tree</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <!-- version set by parent -->
+                    <configuration>
+                        <rules>
+                            <!-- The earliest maven version we verify builds for via ASF Jenkins -->
+                            <requireMavenVersion>
+                                <version>[${maven.min.version},)</version>
+                                <message>Maven is out of date.
+                                    HBase requires at least version ${maven.min.version} of Maven to properly build from source.
+                                    You appear to be using an older version. You can use either "mvn -version" or
+                                    "mvn enforcer:display-info" to verify what version is active.
+                                    See the reference guide on building for more information: http://hbase.apache.org/book.html#build
+                                </message>
+                            </requireMavenVersion>
+                            <!-- The earliest JVM version we verify builds for via ASF Jenkins -->
+                            <requireJavaVersion>
+                                <version>[${javaVersion}.0,${javaVersion}.1000}]</version>
+                                <message>Java is out of date.
+                                    HBase requirs at least version ${java.min.version} of the JDK to properly build from source.
+                                    You appear to be using an older version. You can use either "mvn -version" or
+                                    "mvn enforcer:display-info" to verify what version is active.
+                                    See the reference guide on building for more information: http://hbase.apache.org/book.html#build
+                                </message>
+                            </requireJavaVersion>
+                        </rules>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>clean</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <phase>pre-clean</phase>
+                        </execution>
+                        <execution>
+                            <id>default</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <phase>validate</phase>
+                        </execution>
+                        <execution>
+                            <id>site</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <phase>pre-site</phase>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
