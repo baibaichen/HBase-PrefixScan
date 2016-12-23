@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 
 public class ScanFile {
-    private final byte[] qualifierBytes = "visitTimeCost".getBytes();
+    private final byte[] qualifierBytes = "v".getBytes();
     private Configuration conf;
 
     public  ScanFile(){
@@ -85,7 +85,7 @@ public class ScanFile {
     }
 
     private Cell createAnotherSeekCell() {
-        final  String rowStr = "43015_1448270710720_141307_yhd.orders.get_2_606101";
+        final  String rowStr = "Aa";
         //final  String rowStr = "43015_1448270710720_141307_yhd.orders.get_2_610205";
         byte[] row = rowStr.getBytes();
         return KeyValueUtil.createFirstOnRow(row);
@@ -97,21 +97,10 @@ public class ScanFile {
 
         //row
         String rows[] = {
-//            "43015_1448270710720_141307_yhd.orders.get_2_551535",
-//            "43015_1448270710720_141307_yhd.orders.get_2_556602",
-//            "43015_1448270710720_141307_yhd.orders.get_2_580344",
-//            "43015_1448270710720_141307_yhd.orders.get_2_591946",
-//            "43015_1448270710720_141307_yhd.orders.get_2_597265",
-            "43015_1448270710720_141307_yhd.orders.get_2_6",
-            "43015_1448270710720_141307_yhd.orders.get_2_606101",
-            "43015_1448270710720_141307_yhd.orders.get_2_610205",
-            "43015_1448270710720_141307_yhd.orders.get_2_614364"};
-//            "43015_1448270710720_141307_yhd.orders.get_2_626901",
-//            "43015_1448270710720_141307_yhd.orders.get_2_663775",
-//            "43015_1448270710720_141307_yhd.orders.get_2_665115",
-//            "43015_1448270710720_141307_yhd.orders.get_2_679778",
-//            "43015_1448270710720_141307_yhd.orders.get_2_682224",
-//            "43015_1448270710720_141307_yhd.orders.get_2_685492"};
+            "A",
+            "Aaeeee",
+            "Abc",
+            "Abde"};
 
         byte[][] rowBytes = new byte[rows.length][];
         for( int i = 0; i < rows.length; i++){
@@ -119,12 +108,10 @@ public class ScanFile {
         }
 
         //column family
-        byte[] CF_BYTES = Bytes.toBytes("openapi");
+        byte[] CF_BYTES = Bytes.toBytes("x");
 
         //qualifier
-        String qualifiers[] = {
-            "amount","apiType","categoryId","createTime","invokeMethod","invokeStatus","ip","isFree","isvId","merchantId","methodVer","requestValue",
-            "responseValue","resultCode","resultType","ruleVer","serverIP","visitTimeCost"};
+        String qualifiers[] = {"a","v"};
         byte[][] qualifierBytes = new byte[qualifiers.length][];
 
         for( int i = 0; i < qualifiers.length; i++){
